@@ -19,17 +19,17 @@ denoising_steps: 20
 cond_steps: 1
 horizon_steps: 4
 act_steps: 4
-ft_denoising_steps: 0
+ft_denoising_steps: 10
 
 n_steps: 250  # each episode can take maximum (max_episode_steps / act_steps, =250 right now) steps but may finish earlier in gym. We only count episodes finished within n_steps for evaluation.
-render_num: 0
+render_num: 1
 
 env:
-  n_envs: 40
+  n_envs: 1
   name: ${env_name}
   max_episode_steps: 1000
   reset_at_iteration: False
-  save_video: False
+  save_video: True
   best_reward_threshold_for_success: 3  # success rate not relevant for gym tasks
   wrappers:
     mujoco_locomotion_lowdim:
@@ -41,7 +41,7 @@ env:
       reset_within_step: True
 
 model:
-  _target_: model.diffusion.diffusion_eval_ft.DiffusionEval
+  _target_: model.diffusion.diffusion_eval.DiffusionEval
   ft_denoising_steps: ${ft_denoising_steps}
   predict_epsilon: True
   denoised_clip_value: 1.0

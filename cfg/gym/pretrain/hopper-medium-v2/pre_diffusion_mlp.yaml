@@ -63,4 +63,4 @@ train_dataset:
   dataset_path: ${train_dataset_path}
   horizon_steps: ${horizon_steps}
   cond_steps: ${cond_steps}
-  device: ${device}
+  device: cpu
